@@ -115,7 +115,7 @@ public class MedicationController {
 
     //get medication
     @RequestMapping("/details/{medication_ky}")
-    private ResponseEntity<MedicationResponse> getMedication(@PathVariable(name="medication_ky")Integer imedication_ky)
+    private ResponseEntity<MedicationResponse> getMedicationById(@PathVariable(name="medication_ky")Integer imedication_ky)
     {
         return MSer.getMedicationById(imedication_ky);
     }

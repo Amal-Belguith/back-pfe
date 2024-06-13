@@ -1,6 +1,7 @@
 package com.example.parameterization.Controller;
 
 import com.example.parameterization.Entity.Allergy;
+import com.example.parameterization.Repository.AllergyRepo;
 import com.example.parameterization.Service.AllergyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class AllergyController {
     @Autowired
     private AllergyService allergyService;
+
 
 
     @GetMapping("/all")
@@ -76,6 +78,8 @@ public class AllergyController {
     public boolean checkIfAllergyExists(@RequestParam String allergyName) {
         return allergyService.allergyExists(allergyName);
     }
+
+
 
 
 }

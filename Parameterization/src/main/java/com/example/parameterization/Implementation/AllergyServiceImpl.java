@@ -54,4 +54,6 @@ public class AllergyServiceImpl implements AllergyService {
     public boolean allergyExists(String allergyName) {
         return allergyRepository.existsByAllergyName(allergyName);
     }
+
+
 }

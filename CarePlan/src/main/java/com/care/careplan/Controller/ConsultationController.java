@@ -1,9 +1,9 @@
-/*
-package com.example.parameterization.Controller;
+package com.care.careplan.Controller;
 
-import com.example.parameterization.Entity.Consultation;
-import com.example.parameterization.Entity.Ingredient;
-import com.example.parameterization.Service.ConsultService;
+
+import com.care.careplan.Entity.Consultation;
+import com.care.careplan.Service.ConsultService;
+import com.care.careplan.dto.ConsultationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,18 +16,18 @@ import java.util.List;
 public class ConsultationController {
 
     @Autowired
-    private  ConsultService Conser;
+    private ConsultService Conser;
 
     //add
     @PostMapping(value = "/add")
-    public String addapp(@RequestBody Consultation Con)
-    {
+    public String addcon(@RequestBody Consultation Con) {
         Conser.saveorUpdate(Con);
         return "Consultation Added successfully, ID : " + Con.getCon_ky();
     }
+
     //GetAll
     @GetMapping("/all")
-    public List<Consultation> getConsultation(){
+    public List<Consultation> getConsultation() {
         return Conser.getConsultations();
     }
 
@@ -41,6 +41,8 @@ public class ConsultationController {
         }
     }
 
-
+    @GetMapping("/{id}")
+    public ConsultationDTO getConsultationDetails(@PathVariable Integer id) {
+        return Conser.getConsultationDetails(id);
+    }
 }
-*/

@@ -1,10 +1,7 @@
-package com.example.parameterization.Controller;
+package com.care.careplan.Controller;
 
-
-import com.example.parameterization.Entity.History;
-import com.example.parameterization.Entity.Monitoring;
-import com.example.parameterization.Service.HistoryService;
-import com.example.parameterization.Service.MonitoringService;
+import com.care.careplan.Entity.Monitoring;
+import com.care.careplan.Service.MonitoringService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +13,8 @@ public class MonitoringController {
     @Autowired
     private MonitoringService monSer;
 
+
+
     //add
     @PostMapping(value = "/add")
     public String addMon(@RequestBody Monitoring mon)
@@ -23,5 +22,12 @@ public class MonitoringController {
         monSer.saveorUpdate(mon);
         return "Monitoring Added successfully, ID : " + mon.getMon_ky();
     }
+
+    @GetMapping("/{id}")
+    public Monitoring getMonitoring(@PathVariable Integer id) {
+        return monSer.getMonitoringWithAllergies(id);
+    }
+
+
 
 }

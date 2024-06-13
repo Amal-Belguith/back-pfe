@@ -31,20 +31,7 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
 
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: amalbelguith00@gmail.com
-    password: lpza dpxr rpjy ykpb
-    properties:
-      mail:
-        smtp:
-          ssl:
-            trust: smtp.gmail.com
-          auth: true
-          starttls:
-                enable: true
-                required: true
+
 
 
 

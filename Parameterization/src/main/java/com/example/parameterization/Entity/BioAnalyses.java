@@ -42,7 +42,4 @@ public class BioAnalyses {
     @Column(name = "BiologicalAnalysis_RefValueMax", nullable = false)
     private Double biologicalAnalysisRefValueMax;
 
-    @ManyToMany(mappedBy = "analyses", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("analyses")
-    private Set<Consultation> consultations = new HashSet<>();
 }

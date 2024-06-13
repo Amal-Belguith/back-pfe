@@ -1,6 +1,8 @@
+/*
 package com.example.parameterization.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,56 +32,13 @@ public class Consultation {
 
     private String descCon;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("consultations")
-    @JoinTable(name = "consult_medic",
-            joinColumns = {
-                    @JoinColumn(name = "con_ky", referencedColumnName = "con_ky")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "medication_Ky", referencedColumnName = "medication_Ky")
-            })
-    private Set<Medication> medications = new HashSet<>();;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("consultations")
-    @JoinTable(name = "consult_vacc",
-            joinColumns = {
-                    @JoinColumn(name = "con_ky", referencedColumnName = "con_ky")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "idVaccination", referencedColumnName = "idVaccination")
-            })
-    private Set<Vaccination> vaccinations = new HashSet<>();;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("consultations")
-    @JoinTable(name = "consult_bio",
-            joinColumns = {
-                    @JoinColumn(name = "con_ky", referencedColumnName = "con_ky")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "id", referencedColumnName = "id")
-            })
-    private Set<BioAnalyses> analyses = new HashSet<>();;
-
-    private String descPre ;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("consultations")
-    @JoinTable(name = "consult_surg",
-            joinColumns = {
-                    @JoinColumn(name = "con_ky", referencedColumnName = "con_ky")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "CPT_Ky", referencedColumnName = "CPT_Ky")
-            })
-    private Set<SurgicalProcedure> surgicalProcedures = new HashSet<>();;
-
     private String descSur;
 
     private String comment;
 
-    private Integer user_ky;
+    @Column(name="user_ky")
+    private Integer userKy;
+
 
 }
+*/

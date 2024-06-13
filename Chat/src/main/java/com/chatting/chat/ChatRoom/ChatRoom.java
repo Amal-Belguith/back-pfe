@@ -20,3 +20,4 @@ public class ChatRoom {
     private String senderId;
     private String recipientId;
 }
+

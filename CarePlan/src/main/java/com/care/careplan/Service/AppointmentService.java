@@ -1,7 +1,7 @@
-package com.example.parameterization.Service;
+package com.care.careplan.Service;
 
-import com.example.parameterization.Entity.Appointment;
-import com.example.parameterization.Repository.AppointmentRepo;
+import com.care.careplan.Entity.Appointment;
+import com.care.careplan.Repository.AppointmentRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

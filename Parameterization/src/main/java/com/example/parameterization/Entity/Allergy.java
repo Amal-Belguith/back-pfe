@@ -39,9 +39,6 @@ public class Allergy {
     @Enumerated(EnumType.ORDINAL)
     private Symptoms allergySymptoms;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "Allergies", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("Allergies")
-    private Set<Monitoring> monitories = new HashSet<>();
+
 
 }

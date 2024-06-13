@@ -1,8 +1,7 @@
+/*
 package com.example.parameterization.Service;
 
-import com.example.parameterization.Entity.Appointment;
 import com.example.parameterization.Entity.Consultation;
-import com.example.parameterization.Entity.Ingredient;
 import com.example.parameterization.Repository.ConsultRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +24,9 @@ public class ConsultService {
     public List<Consultation> getConsultations () {
         return conRepo.findAll();
     }
+
+    public List<Consultation> getConsultationsByUserKy(Integer userKy) {
+        return conRepo.findByUserKy(userKy);
+    }
 }
+*/

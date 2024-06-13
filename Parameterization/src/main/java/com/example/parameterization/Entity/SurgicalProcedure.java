@@ -31,8 +31,6 @@ public class SurgicalProcedure implements Serializable {
     @Column(name="CPT_Category")
     private String cptCategory;
 
-    @ManyToMany(mappedBy = "surgicalProcedures", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("surgicalProcedures")
-    private Set<Consultation> consultations = new HashSet<>();
+
 
 }

@@ -1,21 +1,17 @@
-package com.example.parameterization.Controller;
+package com.care.careplan.Controller;
 
 
 
-import com.example.parameterization.Entity.Appointment;
-import com.example.parameterization.Service.AppointmentService;
-import com.example.parameterization.dto.UserDTO;
+import com.care.careplan.Entity.Appointment;
+import com.care.careplan.Service.AppointmentService;
+import com.care.careplan.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")

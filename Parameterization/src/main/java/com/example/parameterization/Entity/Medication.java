@@ -50,8 +50,6 @@ public class Medication {
     @JsonIgnoreProperties("med")
     private List<MedicIngredientLink> medicIngredientLinks;
 
-    @ManyToMany(mappedBy = "medications", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("medications")
-    private Set<Consultation> consultations = new HashSet<>();
+
 
 }

@@ -1,13 +1,16 @@
-package com.example.parameterization.Entity;
+package com.care.careplan.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.example.parameterization.Entity.Allergy;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -24,16 +27,6 @@ public class Monitoring {
     private Integer mon_ky;
 
     private String genInf;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("monitorings")
-    @JoinTable(name = "monito_allerg",
-            joinColumns = {
-                    @JoinColumn(name = "mon_ky", referencedColumnName = "mon_ky")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "allergyKy", referencedColumnName = "allergyKy")
-            })
-    private Set<Allergy> Allergies = new HashSet<>();;
 
     private String height;
     private String weight;
@@ -50,7 +43,19 @@ public class Monitoring {
     private String diastolic;
     private String gly;
     private String comment;
+    private String bandage;
+    private String medications;
+    private String vaccinations;
+    private String analysis;
+    private String exercises;
+    private String massage;
     private Integer user_ky;
+
+    @ElementCollection
+    private List<Long> allergyIds = new ArrayList<>(); // List of Allergy IDs
+
+    @Transient
+    private List<Allergy> allergies = new ArrayList<>(); // Transient as it will be fetched from Allergy microservice
 
 
 }

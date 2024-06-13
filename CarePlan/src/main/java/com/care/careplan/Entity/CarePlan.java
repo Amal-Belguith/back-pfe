@@ -1,4 +1,4 @@
-package com.example.parameterization.Entity;
+package com.care.careplan.Entity;
 
 
 import jakarta.persistence.*;
@@ -36,6 +36,7 @@ public class CarePlan {
     private String shortGol;
     private String longGol;
     private String obq3;
-    private Integer user_ky;
+    @Column(name="user_ky")
+    private Integer userKy;
 
 }

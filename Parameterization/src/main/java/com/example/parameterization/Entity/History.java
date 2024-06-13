@@ -1,12 +1,12 @@
 package com.example.parameterization.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -38,5 +38,7 @@ public class History {
     private String q13;
     private String q14;
     private String q15;
-    private Integer user_ky;
+    @Column(name="user_ky")
+    private Integer userKy;
+
 }

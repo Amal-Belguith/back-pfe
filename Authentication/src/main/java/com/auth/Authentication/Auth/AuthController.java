@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -115,15 +116,17 @@ public class AuthController {
         return service.getUsers();
     }
 
-    /*@PostMapping("/request-password-reset")
-    public ResponseEntity<String> requestPasswordReset(@RequestBody String email) {
+    @PostMapping("/request-password-reset")
+    public ResponseEntity<String> requestPasswordReset(@RequestBody Map<String, String> emailRequest) {
+        String email = emailRequest.get("email");
         passwordResetService.requestPasswordReset(email);
         return ResponseEntity.ok("Password reset email sent");
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestParam String token, @RequestBody String newPassword) {
+    public ResponseEntity<String> resetPassword(@RequestParam String token, @RequestBody Map<String, String> passwordRequest) {
+        String newPassword = passwordRequest.get("newPassword");
         passwordResetService.resetPassword(token, newPassword);
         return ResponseEntity.ok("Password has been reset");
-    }*/
+    }
 }

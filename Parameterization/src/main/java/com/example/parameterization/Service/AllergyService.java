@@ -17,4 +17,5 @@ public interface AllergyService {
     Optional<Allergy> viewDetails(Long iAllergyKy);
 
     public boolean allergyExists(String allergyName);
+
 }

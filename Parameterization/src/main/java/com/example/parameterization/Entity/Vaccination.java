@@ -29,9 +29,6 @@ public class Vaccination {
 
     private String vaccineManufacturer;
 
-    @ManyToMany(mappedBy = "vaccinations", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("vaccinations")
-    private Set<Consultation> consultations = new HashSet<>();
 
     //FetchType.LAZY
     @ManyToMany(fetch = FetchType.EAGER)
