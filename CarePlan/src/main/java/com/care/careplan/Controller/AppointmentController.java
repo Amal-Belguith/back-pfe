@@ -14,8 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/appointment")
+@RequestMapping("/careplan")
 public class AppointmentController {
 
     @Autowired
@@ -28,10 +27,10 @@ public class AppointmentController {
 
     private static final String USER_SERVICE_URL = "http://localhost:8091/api/v1/auth/details";
 
-    @PostMapping(value = "/add")
-    public ResponseEntity<?> addApp(@RequestBody Appointment appointment) {
+    @PostMapping(value = "/add-appointment")
+    public ResponseEntity<Appointment> addApp(@RequestBody Appointment appointment) {
         if (appointmentService.existsByDoctorAndDoaAndEmail(appointment.getDoctor(), appointment.getDoa(), appointment.getTimeslot(), appointment.getEmail())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Choose another date or time");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
 
         Integer userKy = getUserKy(appointment.getEmail());
@@ -42,7 +41,7 @@ public class AppointmentController {
         return ResponseEntity.ok(savedAppointment);
     }
 
-    @PutMapping(value = "/update/{app_ky}")
+    @PutMapping(value = "/update-appointment/{app_ky}")
     public ResponseEntity<?> update(@RequestBody Appointment appointment, @PathVariable("app_ky") Integer appKy) {
 
         if (appointmentService.existsByDoctorAndDoaAndEmail(appointment.getDoctor(), appointment.getDoa(), appointment.getTimeslot(), appointment.getEmail())) {
@@ -72,12 +71,12 @@ public class AppointmentController {
     }
 
 
-    @DeleteMapping("/delete/{appKy}")
+    @DeleteMapping("/delete-appointment/{appKy}")
     public void deleteApp(@PathVariable("appKy") Integer appKy) {
         appointmentService.delete(appKy);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-appointment")
     public List<Appointment> getAppointments() {
         return appointmentService.getAppointment();
     }

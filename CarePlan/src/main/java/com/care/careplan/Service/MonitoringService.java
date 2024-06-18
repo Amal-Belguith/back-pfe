@@ -2,6 +2,7 @@ package com.care.careplan.Service;
 
 
 import com.care.careplan.Client.AllergyFeignClient;
+import com.care.careplan.Entity.CarePlan;
 import com.care.careplan.Entity.Monitoring;
 import com.care.careplan.Repository.MonitoringRepo;
 import com.example.parameterization.Entity.Allergy;
@@ -38,6 +39,10 @@ public class MonitoringService {
         }
         monitoring.setAllergies(allergies);
         return monitoring;
+    }
+
+    public List<Monitoring> getMonitoriesByUserKy(Integer userKy) {
+        return monRepo.findByUserKy(userKy);
     }
 
 }

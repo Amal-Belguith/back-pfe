@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/phycategories")
+@RequestMapping("/parameterization")
 public class PhyTrCategoryController {
     private final PhyTrCategoryService phyTrCategoryService;
 
@@ -27,7 +26,7 @@ public class PhyTrCategoryController {
 
 
     //Upload
-    @PostMapping("/upload-data")
+    @PostMapping("/upload-data-phycategories")
     public ResponseEntity<?> uploadCategoryData(@RequestParam("file") MultipartFile ifile){
         if (ifile.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("Message" , "Empty file uploaded."));
@@ -53,24 +52,24 @@ public class PhyTrCategoryController {
         }
     }
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-phycategories")
     public boolean checkIfCatExists(@RequestParam String phyCategoryName) {
         return phyTrCategoryService.CategoryExists(phyCategoryName);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-phycategories")
     public ResponseEntity<List<PhysicalTreatmentCategory>> getAllPhyTrCategories() {
         List<PhysicalTreatmentCategory> phyTrCategories = phyTrCategoryService.getAllPhyTrCategories();
         return ResponseEntity.ok(phyTrCategories);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view-phycategories/{id}")
     public ResponseEntity<PhysicalTreatmentCategory> getPhyTrCategoryById(@PathVariable("id") long id) {
         PhysicalTreatmentCategory phyTrCategory = phyTrCategoryService.getPhyTrCategoryById(id);
         return ResponseEntity.ok(phyTrCategory);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add-phycategories")
     public ResponseEntity<?> addPhyTrCategory(@RequestBody PhysicalTreatmentCategory iPhyTrCategory) {
         // Vérifie si category existe déjà
         if (phyTrCategoryService.CategoryExists(iPhyTrCategory.getPhyCategoryName())) {
@@ -80,7 +79,7 @@ public class PhyTrCategoryController {
             return ResponseEntity.ok(createdPhyTrCategory);
         }
     }
-    @PutMapping("/update/{id}")
+    @PutMapping("/update-phycategories/{id}")
     public ResponseEntity<?> updatePhyTrCategory(@RequestBody PhysicalTreatmentCategory iPhyTrCategory, @PathVariable ("id") Integer categoryid ) {
 
         if (phyTrCategoryService.CategoryExists(iPhyTrCategory.getPhyCategoryName())) {
@@ -91,13 +90,13 @@ public class PhyTrCategoryController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete-phycategories/{id}")
     public ResponseEntity<Void> deletePhyTrCategory(@PathVariable("id") long iId) {
         phyTrCategoryService.deletePhyTrCategory(iId);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search-phycategories")
     public ResponseEntity<List<PhysicalTreatmentCategory>> retrievePhyTrCategoryByCriteria(@RequestParam("criteria") String criteria) {
         List<PhysicalTreatmentCategory> phyTrCategories = phyTrCategoryService.retrievePhyTrCategoryByCriteria(criteria);
         return ResponseEntity.ok(phyTrCategories);

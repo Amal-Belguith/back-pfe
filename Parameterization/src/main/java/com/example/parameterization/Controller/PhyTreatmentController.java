@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/phytreatments")
+@RequestMapping("/parameterization")
 public class PhyTreatmentController {
     private final PhyTreatmentService phyTreatmentService;
 
@@ -20,13 +19,13 @@ public class PhyTreatmentController {
         this.phyTreatmentService = phyTreatmentService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-phytreatment")
     public ResponseEntity<List<PhysicalTreatment>> getAllTreatments() {
         List<PhysicalTreatment> treatments = phyTreatmentService.getAllTreatments();
         return new ResponseEntity<>(treatments, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view-phytreatment/{id}")
     public ResponseEntity<PhysicalTreatment> getTreatmentById(@PathVariable("id") long id) {
         PhysicalTreatment treatment = phyTreatmentService.getTreatmentById(id);
         if (treatment != null) {
@@ -36,7 +35,7 @@ public class PhyTreatmentController {
         }
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add-phytreatment")
     public ResponseEntity<?> saveTreatment(@RequestBody PhysicalTreatment treatment) {
         if (phyTreatmentService.treatmentExists(treatment.getPhyTrName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Physical Treatment already exists");
@@ -46,7 +45,7 @@ public class PhyTreatmentController {
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update-phytreatment/{id}")
 
     public ResponseEntity<?> updateTreatment(@RequestBody PhysicalTreatment physicalTreatment, @PathVariable("id") long idtreatment ) {
         if (phyTreatmentService.treatmentExists(physicalTreatment.getPhyTrName())) {
@@ -58,7 +57,7 @@ public class PhyTreatmentController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete-phytreatment/{id}")
     public ResponseEntity<Void> deleteTreatment(@PathVariable("id") long id) {
         if (phyTreatmentService.getTreatmentById(id) != null) {
             phyTreatmentService.deleteTreatment(id);
@@ -68,14 +67,14 @@ public class PhyTreatmentController {
         }
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search-phytreatment")
     public ResponseEntity<List<PhysicalTreatment>> searchPhyTreatmentByCriteria(@RequestParam("criteria") String criteria) {
         List<PhysicalTreatment> treatments = phyTreatmentService.retrievePhyTreatmentByCriteria(criteria);
         return new ResponseEntity<>(treatments, HttpStatus.OK);
     }
 
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-phytreatment")
     public boolean checkIftrExists(@RequestParam String phyTrName) {
         return phyTreatmentService.treatmentExists(phyTrName);
     }

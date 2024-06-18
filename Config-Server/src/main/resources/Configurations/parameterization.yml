@@ -9,7 +9,7 @@ server:
   port: 8090
 spring:
   application:
-    name: Parameterization
+    name: parameterization
   config:
     import: optional:configserver:http://localhost:8888
   datasource:
@@ -31,8 +31,11 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
 
+application:
+  config:
+    authentication-url: http://localhost:8093/parameterization
 
-
-
-
-
+management:
+  tracing:
+    sampling:
+      probability: 1.0

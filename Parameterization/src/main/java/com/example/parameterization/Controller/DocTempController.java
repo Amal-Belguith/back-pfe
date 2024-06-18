@@ -18,14 +18,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/docTemp")
+@RequestMapping("/parameterization")
 public class DocTempController {
     private DocTempRepo documentTemplateRepository;
     @Autowired
     private DocTempService docTempService;
 
-    @PostMapping("/upload")
+    @PostMapping("/upload-docTemp")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile ifile,
                                              @RequestParam("title") String ititle,
                                              @RequestParam("description") String idescription,
@@ -41,7 +40,7 @@ public class DocTempController {
         }
     }
 
-    @DeleteMapping("/remove/{id}")
+    @DeleteMapping("/remove-docTemp/{id}")
     public ResponseEntity<HttpStatus> deleteDocTemp(@PathVariable("id") Long iIdDocTemp) {
         Optional<DocTemp> aExistingDocTemp = Optional.ofNullable(docTempService.getDocumentById(iIdDocTemp));
         if (aExistingDocTemp.isPresent()) {
@@ -52,7 +51,7 @@ public class DocTempController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update-docTemp/{id}")
     public ResponseEntity<String> updateDocument(@PathVariable Long id,
                                                  @RequestParam("title") String ititle,
                                                  @RequestParam("description") String idescription,
@@ -68,13 +67,13 @@ public class DocTempController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-docTemp")
     public ResponseEntity<List<DocTemp>> getAllDocuments() {
         List<DocTemp> aDocuments = docTempService.getAllDocuments();
         return ResponseEntity.status(HttpStatus.OK).body(aDocuments);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view-docTemp/{id}")
     public ResponseEntity<DocTemp> getDocumentById(@PathVariable Long id) {
         DocTemp aDocuments = docTempService.getDocumentById(id);
         if (aDocuments != null) {
@@ -84,7 +83,7 @@ public class DocTempController {
         }
     }
 
-    @GetMapping("/download/{id}")
+    @GetMapping("/download-docTemp/{id}")
     public ResponseEntity<byte[]> downloadDocument(@PathVariable Long id) {
         DocTemp docTemp = docTempService.getDocumentById(id);
         if (docTemp != null) {
@@ -103,7 +102,7 @@ public class DocTempController {
     }
 
 
-    @GetMapping("/checkTitleExists")
+    @GetMapping("/checkTitleExists-docTemp")
     public ResponseEntity<Boolean> checkTitleExists(@RequestParam("title") String title) {
         boolean titleExists = docTempService.checkTitleExists(title);
         return ResponseEntity.ok(titleExists);

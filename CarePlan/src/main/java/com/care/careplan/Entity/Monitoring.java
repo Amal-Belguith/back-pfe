@@ -43,13 +43,9 @@ public class Monitoring {
     private String diastolic;
     private String gly;
     private String comment;
-    private String bandage;
-    private String medications;
-    private String vaccinations;
-    private String analysis;
-    private String exercises;
-    private String massage;
-    private Integer user_ky;
+
+    @Column(name="user_ky")
+    private Integer userKy;
 
     @ElementCollection
     private List<Long> allergyIds = new ArrayList<>(); // List of Allergy IDs

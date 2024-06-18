@@ -11,27 +11,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/consultation")
+@RequestMapping("/careplan")
 public class ConsultationController {
 
     @Autowired
     private ConsultService Conser;
 
     //add
-    @PostMapping(value = "/add")
-    public String addcon(@RequestBody Consultation Con) {
+    @PostMapping(value = "/add-consultation")
+    public ResponseEntity<Consultation> addcon(@RequestBody Consultation Con) {
         Conser.saveorUpdate(Con);
-        return "Consultation Added successfully, ID : " + Con.getCon_ky();
+        return ResponseEntity.ok(Con);
     }
 
     //GetAll
-    @GetMapping("/all")
+    @GetMapping("/all-consultation")
     public List<Consultation> getConsultation() {
         return Conser.getConsultations();
     }
 
-    @GetMapping(value = "/user/{userKy}")
+    @GetMapping(value = "/user-consultation/{userKy}")
     public ResponseEntity<List<Consultation>> getConsultationsByUserKy(@PathVariable Integer userKy) {
         List<Consultation> consultations = Conser.getConsultationsByUserKy(userKy);
         if (consultations != null && !consultations.isEmpty()) {
@@ -41,7 +40,7 @@ public class ConsultationController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view-consultation/{id}")
     public ConsultationDTO getConsultationDetails(@PathVariable Integer id) {
         return Conser.getConsultationDetails(id);
     }

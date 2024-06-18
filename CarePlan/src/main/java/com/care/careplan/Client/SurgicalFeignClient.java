@@ -10,10 +10,10 @@ import java.util.List;
 
 @FeignClient(name = "surgical-service")
 public interface SurgicalFeignClient {
-        @GetMapping("/procedures/{id}")
+        @GetMapping("/parameterization/details-procedures/{id}")
         SurgicalProcedure getProcedureById(@PathVariable("id") Long id);
 
-        @GetMapping("/procedures/all")
+        @GetMapping("/parameterization/all-procedures")
         List<SurgicalProcedure> getAllProcedures();
     }
 

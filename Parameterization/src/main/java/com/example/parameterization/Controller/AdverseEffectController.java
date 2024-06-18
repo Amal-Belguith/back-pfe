@@ -16,8 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/adverseEffect")
+@RequestMapping("/parameterization")
 public class AdverseEffectController {
 
     private final AdverseEffectService adverseEffectService;
@@ -27,7 +26,7 @@ public class AdverseEffectController {
     }
 
     //Upload
-    @PostMapping("/upload-data")
+    @PostMapping("/upload-data-adverseEffect")
     public ResponseEntity<?> uploadEffectsData(@RequestParam("file") MultipartFile ifile){
         if (ifile.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("Message" , "Empty file uploaded."));
@@ -53,12 +52,12 @@ public class AdverseEffectController {
         }
     }
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-adverseEffect")
     public boolean checkIfEffExists(@RequestParam String adverseEffectName) {
         return adverseEffectService.EffectsExists(adverseEffectName);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add-adverseEffect")
     public ResponseEntity<?> createAdverseEffect(@RequestBody AdverseEffect iAdverseEffect) {
 
         if (adverseEffectService.EffectsExists(iAdverseEffect.getAdverseEffectName())) {
@@ -69,20 +68,20 @@ public class AdverseEffectController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-adverseEffect")
     public ResponseEntity<List<AdverseEffect>> getAllVaccinations() {
         List<AdverseEffect> aAdverseEffectList = adverseEffectService.retrieveAdverseEffect();
         return new ResponseEntity<>(aAdverseEffectList, HttpStatus.OK);
     }
 
-    @GetMapping("/search/{id}")
+    @GetMapping("/search-adverseEffect/{id}")
     public ResponseEntity<AdverseEffect> getAdverseEffectById(@PathVariable("id") Long iIdAdverseEffect) {
         Optional<AdverseEffect> aAdverseEffect = adverseEffectService.getAdverseEffectById(iIdAdverseEffect);
         return aAdverseEffect.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update-adverseEffect/{id}")
     public ResponseEntity<?> updateVaccination(@PathVariable("id") Long iIdAdverseEffect, @RequestBody AdverseEffect iAdverseEffect) {
         if (adverseEffectService.EffectsExists(iAdverseEffect.getAdverseEffectName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Allergy already exists");
@@ -98,7 +97,7 @@ public class AdverseEffectController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete-adverseEffect/{id}")
     public ResponseEntity<HttpStatus> deleteAdverseEffect(@PathVariable("id") Long iIdAdverseEffect) {
         Optional<AdverseEffect> aExistingAdverseEffect = adverseEffectService.getAdverseEffectById(iIdAdverseEffect);
         if (aExistingAdverseEffect.isPresent()) {

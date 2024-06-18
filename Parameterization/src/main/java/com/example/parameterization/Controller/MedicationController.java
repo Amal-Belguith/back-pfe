@@ -16,8 +16,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/medication")
+@RequestMapping("/parameterization")
 public class MedicationController {
 
     @Autowired
@@ -29,7 +28,7 @@ public class MedicationController {
     }
 
     //Upload
-    @PostMapping("/upload-data")
+    @PostMapping("/upload-data-medication")
     public ResponseEntity<?> uploadMedicationsData(@RequestParam("file") MultipartFile ifile) {
         if (ifile.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("Message" , "Empty file uploaded."));
@@ -60,13 +59,13 @@ public class MedicationController {
     }
 
     //GetAll
-    @GetMapping
+    @GetMapping("/all-medication")
     public List<MedicationResponse> getMedications(){
         return MSer.getMedicationResponses();
     }
 
     //Add
-    @PostMapping(value="/add")
+    @PostMapping(value="/add-medication")
     public ResponseEntity<?> saveMedication(@RequestBody Medication imedications) {
         if (MSer.medicationExists(imedications.getMedicationName(), imedications.getMedicationCode())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Medication already exist");
@@ -77,7 +76,7 @@ public class MedicationController {
         }
     }
 
-    @PutMapping(value="/edit/{medication_ky}")
+    @PutMapping(value="/edit-medication/{medication_ky}")
     public ResponseEntity<?> updateMedication(@RequestBody Medication imedication, @PathVariable(name="medication_ky") Integer iMedication_Ky) {
         try {
 
@@ -107,20 +106,20 @@ public class MedicationController {
     }
 
     //Delete
-    @DeleteMapping("/delete/{Medication_Ky}")
+    @DeleteMapping("/delete-medication/{Medication_Ky}")
     private void deleteMedication(@PathVariable("Medication_Ky")Integer iMedication_Ky)
     {
         MSer.delete(iMedication_Ky);
     }
 
     //get medication
-    @RequestMapping("/details/{medication_ky}")
+    @RequestMapping("/details-medication/{medication_ky}")
     private ResponseEntity<MedicationResponse> getMedicationById(@PathVariable(name="medication_ky")Integer imedication_ky)
     {
         return MSer.getMedicationById(imedication_ky);
     }
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-medication")
     public boolean checkIfMedicationExists(@RequestParam String medicationName, @RequestParam String medicationCode) {
         return MSer.medicationExists(medicationName, medicationCode);
     }

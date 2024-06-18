@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/vaccination")
+@RequestMapping("/parameterization")
 public class VaccinationController {
     private final VaccinationService vaccinationService;
 
@@ -19,7 +18,7 @@ public class VaccinationController {
         this.vaccinationService = vaccinationService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add-vaccination")
     public ResponseEntity<?> createVaccination(@RequestBody Vaccination iVaccination) {
         // Vérifie si vaccination existe déjà
         if (vaccinationService.vaccExists(iVaccination.getVaccineLabel())) {
@@ -30,20 +29,20 @@ public class VaccinationController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-vaccination")
     public ResponseEntity<List<Vaccination>> getAllVaccinations() {
         List<Vaccination> aVaccinationsList = vaccinationService.retrieveVaccinations();
         return new ResponseEntity<>(aVaccinationsList, HttpStatus.OK);
     }
 
-    @GetMapping("/search/{id}")
+    @GetMapping("/search-vaccination/{id}")
     public ResponseEntity<Vaccination> getVaccinationById(@PathVariable("id") Long iIdVaccination) {
         Optional<Vaccination> aVaccination = vaccinationService.getVaccinationById(iIdVaccination);
         return aVaccination.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update-vaccination/{id}")
     public ResponseEntity<?> updateVaccination(@PathVariable("id") Long iIdVaccination, @RequestBody Vaccination iVaccination) {
         // Vérifie si vaccination existe déjà
         if (vaccinationService.vaccExists(iVaccination.getVaccineLabel())) {
@@ -60,7 +59,7 @@ public class VaccinationController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete-vaccination/{id}")
     public ResponseEntity<HttpStatus> deleteVaccination(@PathVariable("id") Long iIdVaccination) {
         Optional<Vaccination> aExistingVaccination = vaccinationService.getVaccinationById(iIdVaccination);
         if (aExistingVaccination.isPresent()) {
@@ -70,13 +69,13 @@ public class VaccinationController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/search")
+    @GetMapping("/search-vaccination")
     public ResponseEntity<List<Vaccination>> retrieveVaccinationByCriteria(@RequestParam("criteria") String iCriteria) {
         List<Vaccination> aVaccinationList = vaccinationService.retrieveVaccinationByCriteria(iCriteria);
         return new ResponseEntity<>(aVaccinationList, HttpStatus.OK);
     }
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-vaccination")
     public boolean checkIfvaccExists(@RequestParam String vaccineLabel) {
         return vaccinationService.vaccExists(vaccineLabel);
     }

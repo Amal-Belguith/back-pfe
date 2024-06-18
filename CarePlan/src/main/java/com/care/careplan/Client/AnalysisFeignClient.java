@@ -11,9 +11,9 @@ import java.util.List;
 @FeignClient(name = "analyses-service")
 public interface AnalysisFeignClient {
 
-    @GetMapping("/bioanalyses/{id}")
+    @GetMapping("/parameterization/view-bioanalyses/{id}")
     BioAnalyses getBioAnalysesById(@PathVariable("id") Long id);
 
-    @GetMapping("/bioanalyses/all")
+    @GetMapping("/parameterization/all-bioanalyses")
     List<BioAnalyses> getAllBioAnalyses();
 }

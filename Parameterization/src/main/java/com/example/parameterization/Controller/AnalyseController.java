@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/bioanalyses")
+@RequestMapping("/parameterization")
 public class AnalyseController {
 
     private final BioAnalysesService bioAnalysesService;
@@ -22,19 +21,19 @@ public class AnalyseController {
         this.bioAnalysesService = bioAnalysesService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-bioanalyses")
     public List<BioAnalyses> getAllBioAnalyses() {
         return bioAnalysesService.getAllBioAnalyses();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view-bioanalyses/{id}")
     public BioAnalyses getBioAnalysesById(@PathVariable("id") long iId) {
         return bioAnalysesService.getBioAnalysesById(iId);
     }
 
 
     //Add Biological Analysis
-    @PostMapping("/add")
+    @PostMapping("/add-bioanalyses")
     public ResponseEntity<?> addBioAnalyses(@RequestBody BioAnalyses iBioAnalyses) {
         if (bioAnalysesService.analyseExists(iBioAnalyses.getBiologicalAnalysisName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Analayse already exists");
@@ -50,7 +49,7 @@ public class AnalyseController {
     //  }
 
     //update biological analyses
-    @PutMapping("/update/{id}")
+    @PutMapping("/update-bioanalyses/{id}")
     public ResponseEntity<?> updateAnalyses(@PathVariable("id") Long iId, @RequestBody BioAnalyses iBioAnalyses) {
         if (bioAnalysesService.analyseExists(iBioAnalyses.getBiologicalAnalysisName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Analayse already exists");
@@ -68,14 +67,14 @@ public class AnalyseController {
 
 
     //Delete Biological Analysis
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete-bioanalyses/{id}")
     public void deleteBioAnalyses(@PathVariable("id") long iId) {
         bioAnalysesService.deleteBioAnalyses(iId);
     }
 
 
     //Search Biological Analysis
-    @GetMapping("/search")
+    @GetMapping("/search-bioanalyses")
     public ResponseEntity<List<BioAnalyses>> retrieveBioAnalysesByCriteria(@RequestParam("criteria") String iCriteria) {
         List<BioAnalyses> iBioAnalyses = bioAnalysesService.retrieveBioAnalysesByCriteria(iCriteria);
         return new ResponseEntity<>(iBioAnalyses, HttpStatus.OK);
@@ -88,7 +87,7 @@ public class AnalyseController {
     // }
 
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-bioanalyses")
     public boolean checkIfAnalyseExists(@RequestParam String biologicalAnalysisName) {
         return bioAnalysesService.analyseExists(biologicalAnalysisName);
     }

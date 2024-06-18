@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/allergies")
+@RequestMapping("/parameterization")
 
 public class AllergyController {
     @Autowired
@@ -22,12 +21,12 @@ public class AllergyController {
 
 
 
-    @GetMapping("/all")
+    @GetMapping("/all-allergy")
     public ResponseEntity<List<Allergy>> getAllAllergies() {
         List<Allergy> aAllergiesList = allergyService.getAllAllergies();
         return new ResponseEntity<>(aAllergiesList, HttpStatus.OK);
     }
-    @PostMapping("/add")
+    @PostMapping("/add-allergy")
     public ResponseEntity<?> addAllergy(@RequestBody Allergy iAllergy) {
         // Vérifie si allergy existe déjà
         if (allergyService.allergyExists(iAllergy.getAllergyName())) {
@@ -38,7 +37,7 @@ public class AllergyController {
         }
     }
 
-    @PutMapping("/update/{iAllergyKy}")
+    @PutMapping("/update-allergy/{iAllergyKy}")
     public ResponseEntity<?> updateAllergy(@PathVariable("iAllergyKy") Long iAllergyKy, @RequestBody Allergy iAllergy) {
         if (allergyService.allergyExists(iAllergy.getAllergyName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Allergy already exists");
@@ -54,27 +53,27 @@ public class AllergyController {
         }
     }
 
-    @DeleteMapping("/remove/{iAllergyKy}")
+    @DeleteMapping("/remove-allergy/{iAllergyKy}")
     public ResponseEntity<Void> removeAllergy(@PathVariable Long iAllergyKy) {
         allergyService.removeAllergy(iAllergyKy);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search-allergy")
     public ResponseEntity<List<Allergy>> retrieveAllergiesByCriteria(@RequestParam String iCriteria) {
         List<Allergy> aAllergiesList = allergyService.retrieveAllergiesByCriteria(iCriteria);
         return ResponseEntity.ok(aAllergiesList);
     }
 
 
-    @GetMapping("/view/details/{iAllergyKy}")
+    @GetMapping("/view-allergy/details/{iAllergyKy}")
     public ResponseEntity<Allergy> getAllergyById(@PathVariable Long iAllergyKy) {
         return allergyService.viewDetails(iAllergyKy)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-allergy")
     public boolean checkIfAllergyExists(@RequestParam String allergyName) {
         return allergyService.allergyExists(allergyName);
     }

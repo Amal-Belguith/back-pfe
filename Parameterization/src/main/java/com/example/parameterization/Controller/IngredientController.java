@@ -13,14 +13,13 @@ import java.io.IOException;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/ingredient")
+@RequestMapping("/parameterization")
 public class IngredientController {
 
     @Autowired
     private IngredientService Iser;
 
-    @PostMapping(value="/add")
+    @PostMapping(value="/add-ingredient")
     public ResponseEntity<?> saveIngredient(@RequestBody Ingredient ingredient) {
         // Vérifie si l'ingrédient existe déjà
         if (Iser.ingredientExists(ingredient.getIngredientName())) {
@@ -33,7 +32,7 @@ public class IngredientController {
     }
 
     //Upload
-    @PostMapping("/upload-data")
+    @PostMapping("/upload-data-ingredient")
     public ResponseEntity<?> uploadIngredientsData(@RequestParam("file") MultipartFile ifile){
         if (ifile.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("Message" , "Empty file uploaded."));
@@ -60,7 +59,7 @@ public class IngredientController {
     }
 
     //update
-    @PutMapping(value="/edit/{ingredient_ky}")
+    @PutMapping(value="/edit-ingredient/{ingredient_ky}")
     private ResponseEntity<?> update(@RequestBody Ingredient ingredient, @PathVariable(name="ingredient_ky")Integer ingredient_ky) {
 
         // Vérifie si l'ingrédient existe déjà
@@ -74,27 +73,27 @@ public class IngredientController {
     }
 
     //Delete
-    @DeleteMapping("/delete/{ingredient_ky}")
+    @DeleteMapping("/delete-ingredient/{ingredient_ky}")
     private void deleteIngredient(@PathVariable("ingredient_ky")Integer ingredient_ky)
     {
         Iser.delete(ingredient_ky);
     }
 
     //get ingredient
-    @RequestMapping("/details/{ingredient_ky}")
+    @RequestMapping("/details-ingredient/{ingredient_ky}")
     private Optional<Ingredient> getIngredient(@PathVariable("ingredient_ky") Integer ingredient_ky) {
         return Iser.getIngredientById(ingredient_ky);
     }
 
 
     //GetAll
-    @GetMapping
+    @GetMapping("/all-ingredient")
     public List<Ingredient> getIngredients(){
         return Iser.getIngredients();
     }
 
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-ingredient")
     public boolean checkIfIngredientExists(@RequestParam String ingredientName) {
         return Iser.ingredientExists(ingredientName);
     }

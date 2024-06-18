@@ -11,9 +11,9 @@ import java.util.List;
 @FeignClient(name = "medication-service")
 public interface MedicationFeignClient {
 
-    @GetMapping("/medication/{id}")
+    @GetMapping("/parameterization/details-medication/{id}")
     MedicationResponse getMedicationById(@PathVariable("id") Integer id);
 
-    @GetMapping("/medication/all")
+    @GetMapping("/parameterization/all-medication")
     List<MedicationResponse> getMedications();
 }

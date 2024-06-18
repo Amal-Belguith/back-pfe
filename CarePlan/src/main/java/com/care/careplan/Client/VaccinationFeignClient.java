@@ -11,9 +11,9 @@ import java.util.List;
 @FeignClient(name = "vaccination-service")
 public interface VaccinationFeignClient {
 
-    @GetMapping("/vaccination/{id}")
+    @GetMapping("/parameterization/search-vaccination/{id}")
     Vaccination getVaccinationById(@PathVariable("id") Long id);
 
-    @GetMapping("/vaccination/all")
+    @GetMapping("/parameterization/all-vaccination")
     List<Vaccination> getAllVaccinations();
 }

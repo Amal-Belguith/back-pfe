@@ -35,7 +35,6 @@ public class IngredientService {
     }
 
     // Méthode pour récupérer les ingredients à partir d'un fichier Excel
-    // Méthode pour récupérer les ingredients à partir d'un fichier Excel
     public static List<Ingredient> getIngredientsDataFromExcel(InputStream inputStream) {
         List<Ingredient> aingredients = new ArrayList<>();
         try {

@@ -6,10 +6,10 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 server:
-  port: 8090
+  port: 8092
 spring:
   application:
-    name: Parameterization
+    name: careplan
   config:
     import: optional:configserver:http://localhost:8888
   datasource:
@@ -31,8 +31,25 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: amalbelguith00@gmail.com
+    password: lpza dpxr rpjy ykpb
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: smtp.gmail.com
+          auth: true
+          starttls:
+            enable: true
+            required: true
+application:
+  config:
+    authentication-url: http://localhost:8093/careplan
 
-
-
-
-
+management:
+  tracing:
+    sampling:
+      probability: 1.0

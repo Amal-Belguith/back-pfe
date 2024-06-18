@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/careplan")
 public class CarePlanController {
 
@@ -20,22 +19,22 @@ public class CarePlanController {
     private CareService careServ;
 
     //add
-    @PostMapping(value = "/add")
-    public String addCare(@RequestBody CarePlan care)
+    @PostMapping(value = "/add-careplan")
+    public ResponseEntity<CarePlan> addCare(@RequestBody CarePlan care)
     {
         careServ.saveorUpdate(care);
-        return "CarePlan Added successfully, ID : " + care.getCare_ky();
+        return ResponseEntity.ok(care);
     }
-    @GetMapping("/all")
+    @GetMapping("/all-careplan")
     public List<CarePlan> getCareplans() {
         return careServ.getCareplans();
     }
-    @DeleteMapping("/delete/{care_ky}")
+    @DeleteMapping("/delete-careplan/{care_ky}")
     public void deleteCare(@PathVariable("care_ky") Integer care_ky) {
         careServ.delete(care_ky);
     }
 
-    @GetMapping(value = "/user/{userKy}")
+    @GetMapping(value = "/user-careplan/{userKy}")
     public ResponseEntity<List<CarePlan>> getCareplansByUserKy(@PathVariable Integer userKy) {
         List<CarePlan> careplans = careServ.getCareplansByUserKy(userKy);
         if (careplans != null && !careplans.isEmpty()) {

@@ -10,10 +10,10 @@ import java.util.List;
 @FeignClient(name = "allergy-service")
 public interface AllergyFeignClient {
 
-    @GetMapping("/allergies/{id}")
+    @GetMapping("/parameterization/view-allergy/details/{id}")
     Allergy getAllergyById(@PathVariable("id") Long id);
 
-    @GetMapping("/allergies/all")
+    @GetMapping("/parameterization/all-allergy")
     List<Allergy> getAllAllergies();
 }
 

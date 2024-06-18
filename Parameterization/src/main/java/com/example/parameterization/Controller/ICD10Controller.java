@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/icd10")
+@RequestMapping("/parameterization")
 public class ICD10Controller {
     private final ICD10Service icd10Service;
 
@@ -21,13 +21,13 @@ public class ICD10Controller {
         this.icd10Service = icd10Service;
     }
 
-    @PostMapping("/saveICD10")
+    @PostMapping("/save-icd10")
     public ResponseEntity<String> saveICD10(@RequestBody ICD10 icd10) {
         icd10Service.saveICD10(icd10);
         return ResponseEntity.status(HttpStatus.CREATED).body("ICD10 ajouté avec succès.");
     }
 
-    @PostMapping("add/{iCode}/{iDescription}/{iNotes}")
+    @PostMapping("/add-icd10/{iCode}/{iDescription}/{iNotes}")
     public ResponseEntity<String> addICD10(@PathVariable String iCode, @PathVariable String iDescription, @PathVariable String iNotes) {
         try {
             icd10Service.AddCode(iCode,iDescription,iNotes);
@@ -38,7 +38,7 @@ public class ICD10Controller {
     }
 
 
-    @DeleteMapping("/delete/{iCode}")
+    @DeleteMapping("/delete-icd10/{iCode}")
     public ResponseEntity<String> deleteICD10(@PathVariable String iCode) {
         try {
             icd10Service.deleteICD10(iCode);
@@ -50,7 +50,7 @@ public class ICD10Controller {
     }
 
 
-    @PostMapping("/upload")
+    @PostMapping("/upload-icd10")
     public ResponseEntity<?> uploadCustomersData(@RequestParam("file") MultipartFile file) throws IOException {
         this.icd10Service.saveICD10codesToDatabase(file);
         return ResponseEntity.ok(Map.of("Message", "ICD10Codes data uploaded and saved to database successfully"));
@@ -59,7 +59,7 @@ public class ICD10Controller {
 
 
 
-    @PostMapping("/test-excel-validation")
+    @PostMapping("/test-excel-validation-icd10")
     public ResponseEntity<String> testExcelValidation(@RequestParam("file") MultipartFile file) {
         boolean isValid = icd10Service.isValidExcelFile(file);
         if (isValid) {
@@ -70,12 +70,12 @@ public class ICD10Controller {
     }
 
 
-    @GetMapping("/viewICD10Details/{iCode}")
+    @GetMapping("/view-icd10Details/{iCode}")
     public Optional<ICD10> viewICD10Details(@PathVariable String iCode) {
         return icd10Service.viewDetailsICD10(iCode);
     }
 
-    @GetMapping
+    @GetMapping("/all-icd10")
         public ResponseEntity<List<ICD10>> getCustomers(){
             return new ResponseEntity<>(icd10Service.getICD10Codes(), HttpStatus.FOUND);
         }

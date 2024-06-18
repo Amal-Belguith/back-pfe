@@ -1,12 +1,13 @@
-package com.example.parameterization.Service;
+package com.care.careplan.Service;
 
 
-import com.example.parameterization.Entity.History;
-import com.example.parameterization.Repository.HistoryRepo;
-import com.example.parameterization.security.VigenereCipher;
+
+import com.care.careplan.Entity.History;
+import com.care.careplan.Repository.HistoryRepo;
+import com.care.careplan.security.VigenereCipher;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 

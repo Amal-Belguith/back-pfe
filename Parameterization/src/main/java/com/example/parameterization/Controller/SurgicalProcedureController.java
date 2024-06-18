@@ -12,22 +12,21 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/procedures")
+@RequestMapping("/parameterization")
 public class SurgicalProcedureController {
     @Autowired
     private SurgicalProcedureService Iservice;
 
-    @GetMapping
+    @GetMapping("/all-procedures")
     public List<SurgicalProcedure> getAllProcedures() {
         return Iservice.getAllProcedures();
     }
 
-    @GetMapping ("/details/{cptky}")
+    @GetMapping ("/details-procedures/{cptky}")
     public SurgicalProcedure getProcedureById(@PathVariable("cptky") Integer cptky) {
         return Iservice.getProcedureById(cptky);
     }
-    @PostMapping ("/add")
+    @PostMapping ("/add-procedures")
     public ResponseEntity<?> addProcedure(@RequestBody SurgicalProcedure procedure) {
         if (Iservice.surgicalExists(procedure.getCptCode())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Surgical already exists");
@@ -36,7 +35,7 @@ public class SurgicalProcedureController {
             return ResponseEntity.ok(surgical);
         }
     }
-    @PutMapping("/update/{cptky}")
+    @PutMapping("/update-procedures/{cptky}")
     public ResponseEntity<?> updateProcedure(@PathVariable("cptky") Integer cptky, @RequestBody SurgicalProcedure procedure) {
         if (Iservice.surgicalExists(procedure.getCptCode())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Surgical already exists");
@@ -46,12 +45,12 @@ public class SurgicalProcedureController {
 
         }
     }
-    @DeleteMapping("/delete/{cptky}")
+    @DeleteMapping("/delete-procedures/{cptky}")
     public void deleteProcedure(@PathVariable("cptky") Integer cptky){
         Iservice.deleteProcedure(cptky);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search-procedures")
     public List<SurgicalProcedure> searchProcedures(@RequestParam(required = false) String cptCode) {
         if (cptCode != null && !cptCode.isEmpty()) {
             return Iservice.searchByCptCode(cptCode);
@@ -60,7 +59,7 @@ public class SurgicalProcedureController {
         }
     }
     //exist
-    @GetMapping("/exists")
+    @GetMapping("/exists-procedures")
     public boolean checkIfSurgicalExists(@RequestParam String cptCode) {
         return Iservice.surgicalExists(cptCode);
     }
