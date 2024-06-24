@@ -11,6 +11,7 @@
         <module name="CarePlan" />
         <module name="Gateway" />
         <module name="Authentication" />
+        <module name="kafka-consumer" />
         <module name="Discovery" />
         <module name="Chat" />
         <module name="Parameterization" />
@@ -33,6 +34,7 @@
       <module name="Gateway" options="-parameters" />
       <module name="Parameterization" options="-parameters" />
       <module name="careplan-backend" options="-parameters" />
+      <module name="kafka-consumer" options="-parameters" />
     </option>
   </component>
 </project>

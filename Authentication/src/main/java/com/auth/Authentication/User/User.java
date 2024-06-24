@@ -38,7 +38,16 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
+    @Column(unique = true, nullable = false)
+    private String nickName;
+
+    private String fullName;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
+
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

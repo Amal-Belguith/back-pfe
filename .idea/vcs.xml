@@ -4,11 +4,11 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Authentication" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Authentification/CarePlan" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Chat" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Config-Server" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Discovery" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Gateway" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Parameterization" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../kafkaaa/realtime-notification-service" vcs="Git" />
   </component>
 </project>
