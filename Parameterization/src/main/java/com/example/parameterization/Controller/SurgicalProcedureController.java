@@ -37,13 +37,10 @@ public class SurgicalProcedureController {
     }
     @PutMapping("/update-procedures/{cptky}")
     public ResponseEntity<?> updateProcedure(@PathVariable("cptky") Integer cptky, @RequestBody SurgicalProcedure procedure) {
-        if (Iservice.surgicalExists(procedure.getCptCode())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Surgical already exists");
-        } else {
+
             SurgicalProcedure surg = Iservice.updateProcedure(cptky, procedure);
             return ResponseEntity.ok(surg);
 
-        }
     }
     @DeleteMapping("/delete-procedures/{cptky}")
     public void deleteProcedure(@PathVariable("cptky") Integer cptky){

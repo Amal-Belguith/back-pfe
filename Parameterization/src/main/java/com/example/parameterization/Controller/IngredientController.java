@@ -62,14 +62,11 @@ public class IngredientController {
     @PutMapping(value="/edit-ingredient/{ingredient_ky}")
     private ResponseEntity<?> update(@RequestBody Ingredient ingredient, @PathVariable(name="ingredient_ky")Integer ingredient_ky) {
 
-        // Vérifie si l'ingrédient existe déjà
-        if (Iser.ingredientExists(ingredient.getIngredientName())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Ingredient already exists");
-        } else {
+
             ingredient.setIngredientKy(ingredient_ky);
             Ingredient ing = Iser.saveorUpdate(ingredient);
             return ResponseEntity.ok(ing);
-        }
+
     }
 
     //Delete

@@ -1,7 +1,13 @@
 package com.auth.Authentication;
 
+import com.auth.Authentication.Auth.AuthenticationService;
+import com.auth.Authentication.Auth.RegisterRequest;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import static com.auth.Authentication.User.Role.ADMIN;
 
 @SpringBootApplication
 public class AuthenticationApplication {
@@ -10,7 +16,7 @@ public class AuthenticationApplication {
         SpringApplication.run(AuthenticationApplication.class, args);
     }
 
-/* @Bean
+/*@Bean
     public CommandLineRunner commandLineRunner(
             AuthenticationService service
     ) {
@@ -19,7 +25,7 @@ public class AuthenticationApplication {
                     .firstname("Admin")
                     .lastname("Admin")
                     .email("admin@gmail.com")
-                    .password("adminadmin")
+                    .password("admin")
                     .role(ADMIN)
                     .build();
             System.out.println("Admin token: " + service.register(admin).getAccessToken());

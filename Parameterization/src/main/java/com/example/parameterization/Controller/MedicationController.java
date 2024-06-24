@@ -80,9 +80,7 @@ public class MedicationController {
     public ResponseEntity<?> updateMedication(@RequestBody Medication imedication, @PathVariable(name="medication_ky") Integer iMedication_Ky) {
         try {
 
-            if (MSer.medicationExists(imedication.getMedicationName(), imedication.getMedicationCode())) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Medication already exist");
-            } else {
+
                 Medication existingMedication = MSer.findById(iMedication_Ky);
 
                 // Mettre à jour les attributs du médicament existant
@@ -98,7 +96,7 @@ public class MedicationController {
                 Medication updatedMedication = MSer.saveorUpdate(existingMedication);
 
                 return ResponseEntity.ok(updatedMedication);
-            }
+
         } catch (Exception e) {
             // Gérer les erreurs ici
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

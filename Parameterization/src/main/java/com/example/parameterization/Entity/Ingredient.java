@@ -1,5 +1,6 @@
 package com.example.parameterization.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,8 +32,6 @@ public class Ingredient {
     @JsonIgnore
     @OneToMany(mappedBy = "ing")
     private List<MedicIngredientLink> MedicIngredientLinks;
-
-
 
 }
 

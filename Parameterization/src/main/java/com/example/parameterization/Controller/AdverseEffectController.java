@@ -83,9 +83,6 @@ public class AdverseEffectController {
 
     @PutMapping("/update-adverseEffect/{id}")
     public ResponseEntity<?> updateVaccination(@PathVariable("id") Long iIdAdverseEffect, @RequestBody AdverseEffect iAdverseEffect) {
-        if (adverseEffectService.EffectsExists(iAdverseEffect.getAdverseEffectName())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Allergy already exists");
-        } else {
             Optional<AdverseEffect> aExistingAdverseEffect = adverseEffectService.getAdverseEffectById(iIdAdverseEffect);
             if (aExistingAdverseEffect.isPresent()) {
                 iAdverseEffect.setIdAdverseEffect(iIdAdverseEffect);
@@ -93,7 +90,7 @@ public class AdverseEffectController {
                 return new ResponseEntity<>(adv, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+
         }
     }
 

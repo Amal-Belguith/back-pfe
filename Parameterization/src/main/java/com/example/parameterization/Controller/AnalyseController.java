@@ -35,12 +35,10 @@ public class AnalyseController {
     //Add Biological Analysis
     @PostMapping("/add-bioanalyses")
     public ResponseEntity<?> addBioAnalyses(@RequestBody BioAnalyses iBioAnalyses) {
-        if (bioAnalysesService.analyseExists(iBioAnalyses.getBiologicalAnalysisName())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Analayse already exists");
-        } else {
+
             BioAnalyses analyses= bioAnalysesService.addBioAnalyses(iBioAnalyses);
             return ResponseEntity.ok(analyses);
-        }
+
     }
 
     //public ResponseEntity<String> addBiologicalAnalysis(@RequestBody BioAnalyses analyses) {

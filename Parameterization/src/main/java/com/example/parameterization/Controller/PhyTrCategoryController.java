@@ -82,12 +82,10 @@ public class PhyTrCategoryController {
     @PutMapping("/update-phycategories/{id}")
     public ResponseEntity<?> updatePhyTrCategory(@RequestBody PhysicalTreatmentCategory iPhyTrCategory, @PathVariable ("id") Integer categoryid ) {
 
-        if (phyTrCategoryService.CategoryExists(iPhyTrCategory.getPhyCategoryName())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Category already exists");
-        } else {
+
            PhysicalTreatmentCategory phys= phyTrCategoryService.updatePhyTrCategory(iPhyTrCategory, categoryid);
             return ResponseEntity.ok(phys);
-        }
+
     }
 
     @DeleteMapping("/delete-phycategories/{id}")
