@@ -30,6 +30,7 @@ public class Consultation {
     private String descCon;
 
     private String descSur;
+    private String descPre;
 
     private String comment;
 

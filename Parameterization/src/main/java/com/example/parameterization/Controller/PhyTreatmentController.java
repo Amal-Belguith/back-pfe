@@ -48,12 +48,9 @@ public class PhyTreatmentController {
     @PutMapping("/update-phytreatment/{id}")
 
     public ResponseEntity<?> updateTreatment(@RequestBody PhysicalTreatment physicalTreatment, @PathVariable("id") long idtreatment ) {
-        if (phyTreatmentService.treatmentExists(physicalTreatment.getPhyTrName())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Physical Treatment already exists");
-        } else {
 
             return new ResponseEntity<>(phyTreatmentService.updateTreatment(physicalTreatment, idtreatment), HttpStatus.OK);
-        }
+
     }
 
 

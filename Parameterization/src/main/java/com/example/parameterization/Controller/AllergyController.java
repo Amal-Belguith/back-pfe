@@ -39,9 +39,6 @@ public class AllergyController {
 
     @PutMapping("/update-allergy/{iAllergyKy}")
     public ResponseEntity<?> updateAllergy(@PathVariable("iAllergyKy") Long iAllergyKy, @RequestBody Allergy iAllergy) {
-        if (allergyService.allergyExists(iAllergy.getAllergyName())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Allergy already exists");
-        } else {
             Optional<Allergy> aExistingAllergy = allergyService.viewDetails(iAllergyKy);
             if (aExistingAllergy.isPresent()) {
                 iAllergy.setAllergyKy(iAllergyKy);
@@ -50,7 +47,6 @@ public class AllergyController {
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-        }
     }
 
     @DeleteMapping("/remove-allergy/{iAllergyKy}")

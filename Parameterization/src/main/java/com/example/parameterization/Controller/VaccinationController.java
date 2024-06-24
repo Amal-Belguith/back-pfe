@@ -44,10 +44,7 @@ public class VaccinationController {
 
     @PutMapping("/update-vaccination/{id}")
     public ResponseEntity<?> updateVaccination(@PathVariable("id") Long iIdVaccination, @RequestBody Vaccination iVaccination) {
-        // Vérifie si vaccination existe déjà
-        if (vaccinationService.vaccExists(iVaccination.getVaccineLabel())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Vaccination already exists");
-        } else {
+
             Optional<Vaccination> aExistingVaccination = vaccinationService.getVaccinationById(iIdVaccination);
             if (aExistingVaccination.isPresent()) {
                 iVaccination.setIdVaccination(iIdVaccination);
@@ -55,7 +52,7 @@ public class VaccinationController {
                 return new ResponseEntity<>(iVaccination, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+
         }
     }
 
